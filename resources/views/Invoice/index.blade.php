@@ -7,7 +7,7 @@
 		<title>Invoice</title>
 
 		<!-- Favicon -->
-		{{-- <link rel="icon" href="./images/favicon.png" type="image/x-icon" /> --}}
+		<!-- {{-- <link rel="icon" href="./images/favicon.png" type="image/x-icon" /> --}} -->
 
 		<!-- Invoice styling -->
 		<style>
@@ -101,6 +101,19 @@
 				font-weight: bold;
 			}
 
+			.watermark{
+				position: absolute;
+				top: 50%;
+				left:50%;
+				transform: translate(-50%, -50%);
+				font-size: 80px;
+				color: rgba(0, 0, 0, 0.1);
+				white-space: nowrap;
+				z-index: -1;
+				user-select: none;
+				pointer-events: none;
+			}
+
 			@media only screen and (max-width: 600px) {
 				.invoice-box table tr.top table td {
 					width: 100%;
@@ -118,19 +131,22 @@
 	</head>
 
 	<body>
-		{{-- <h1>A simple, clean, and responsive HTML invoice template</h1>
+		<!-- {{-- <h1>A simple, clean, and responsive HTML invoice template</h1>
 		<h3>Because sometimes, all you need is something simple.</h3>
 		Find the code on <a href="https://github.com/sparksuite/simple-html-invoice-template">GitHub</a>. Licensed under the
-		<a href="http://opensource.org/licenses/MIT" target="_blank">MIT license</a>.<br /><br /><br /> --}}
+		<a href="http://opensource.org/licenses/MIT" target="_blank">MIT license</a>.<br /><br /><br /> --}} -->
 
 		<div class="invoice-box">
+			@if($invoice->paid_date)
+				<div class="watermark">LUNAS</div>
+			@endif
 			<table>
 				<tr class="top">
 					<td colspan="2">
 						<table>
 							<tr>
 								<td class="title">
-									{{-- <img src="./images/logo.png" alt="Company logo" style="width: 100%; max-width: 300px" /> --}}
+									 <!-- <img src="./images/logo.png" alt="Company logo" style="width: 100%; max-width: 300px" /> -->
                   <h4>Villa Ummah</h4>
 								</td>
 
@@ -154,27 +170,27 @@
 									{{$invoice->project->client->address}}<br />
 								</td>
 
-								{{-- <td>
+								 <!-- <td>
 									Acme Corp.<br />
 									John Doe<br />
 									john@example.com
-								</td> --}}
+								</td>  -->
 							</tr>
 						</table>
 					</td>
 				</tr>
 
-				{{-- <tr class="heading">
+				 <!-- <tr class="heading">
 					<td>Payment Method</td>
 
 					<td>Check #</td>
-				</tr> --}}
+				</tr> 
 
-				{{-- <tr class="details">
+				 <tr class="details">
 					<td>Check</td>
 
 					<td>1000</td>
-				</tr> --}}
+				</tr>  -->
 
 				<tr class="heading">
 					<td>Item</td>
@@ -188,10 +204,10 @@
             {{$invoice->detail }}
           </td>
 
-					<td>$300.00</td>
+					<td>{{$invoice->total_idr}}</td>
 				</tr>
 
-				{{-- <tr class="item">
+				<!-- <tr class="item">
 					<td>Hosting (3 months)</td>
 
 					<td>$75.00</td>
@@ -201,14 +217,16 @@
 					<td>Domain name (1 year)</td>
 
 					<td>$10.00</td>
-				</tr> --}}
+				</tr> -->
 
 				<tr class="total">
 					<td></td>
-
-					<td>Total: $385.00</td>
+					<td>Total: {{$invoice->total_idr}}</td>
 				</tr>
+
 			</table>
+			<p>Notes</p>
+			<p>{{$invoice->notes}}</p>
 		</div>
 	</body>
 </html>

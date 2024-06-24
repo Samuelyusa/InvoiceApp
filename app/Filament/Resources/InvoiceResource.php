@@ -105,6 +105,11 @@ class InvoiceResource extends Resource
                 Action::make('View Invoice')
                     ->url(fn (Invoice $record): string => route('preview-invoice', $record))
                     ->color('success')
+                    ->openUrlInNewTab(),
+
+                Action::make('Download Invoice')
+                    ->url(fn (Invoice $record): string => route('download-invoice', $record))
+                    ->color('danger')
                     ->openUrlInNewTab()
             ])
             ->bulkActions([

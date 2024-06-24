@@ -31,4 +31,8 @@ class Invoice extends Model
     {
         return $this->belongsTo(Client::class);
     }
+
+    public function getTotalIdrAttribute(){
+        return 'Rp ' . number_format($this->total, 0, ',', '.');
+    }
 }
